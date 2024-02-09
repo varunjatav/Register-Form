@@ -3,41 +3,64 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
-main().catch(err => console.log(err));
+const password = '2NaFFZAQgd0GLCfG'
+const uri = `mongodb+srv://varunJatav1998:${password}@studentscluster.lnrn49o.mongodb.net/?retryWrites=true&w=majority/`;
+// mongodb+srv://varunJatav1998:<password>@studentscluster.lnrn49o.mongodb.net/?retryWrites=true&w=majority
+//2NaFFZAQgd0GLCfG
 
-async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/demo');
-  console.log('db connected');
-
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-}
-
-const userSchema = new mongoose.Schema({
+const registrationSchema = new mongoose.Schema({
     name: String,
-    email: String,
-    password: String
+    date: String,
+    age: String,
+    gender: String,
+    address:String,
+    courses: String
 });
 
-const User = mongoose.model('User', userSchema);
+const Registration = mongoose.model('registrations', registrationSchema);
+var postedData = [];
+async function main() {
+    try{
+        await mongoose.connect(uri);
+        //  await Registration.insertMany(student1);
+        console.log(`MongoDB host: ${mongoose.connection.host}`);
+        // console.log(data);
+        server.post('/demo',async (req,res)=> {
+            try {
+                let registration = new Registration();
+                registration.name = req.body.name;
+                registration.date = req.body.date;
+                registration.age = req.body.age;
+                registration.gender = req.body.gender;
+                registration.address = req.body.address;
+                registration.courses = req.body.courses;
+                console.log("Registration Obj : ",registration);
+                
+                const doc = await registration.save();
+                postedData.push(doc);
+                console.log("doc :", doc);
+                res.json(doc);
+            } catch (error) {
+                console.error("Error saving registration data:", error);
+                res.status(500).json({ error: "Failed to save registration data" });
+            }
+         
+            // console.log(res);
+        })
+    }catch(error){
+        console.error("Error connecting to MongoDB:", error);
+    } 
+}
+
+main();
 
 const server = express();
 const port = 3000;
 server.use(cors());
 
 server.use(bodyParser.json());
-var postedData = [];
-server.post('/demo',async (req,res)=> {
 
-    let user = new User();
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.password = req.body.password;
 
-    const doc = await user.save();
-    postedData.push(doc);
-    console.log(doc);
-    res.json(req.body);
-})
 server.get('/demo',(req,res) => {
     res.json(postedData);
 })

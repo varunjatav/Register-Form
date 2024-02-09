@@ -2,9 +2,8 @@
     width: 100%;
 }
 form{
-    width: 300px;
+    width: 500px;
     margin: auto;
-    border: 1px solid black;
     height: 300px;
 }
 form div {
@@ -12,8 +11,7 @@ form div {
  display: flex;
  flex-direction: column;
 }
-form div input{
+form div input, select{
     margin: 10px auto;
     width: 90%;
-    height: 20px;
 }
