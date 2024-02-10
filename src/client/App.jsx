@@ -4,7 +4,7 @@ import "./App.module.css";
 function App() {
 
   const [registration,setRegistration] = useState({
-    name:"", date:"", age:"",gender:"",address:"",courses:"",
+    name:"", email:"", date:"", age:"",gender:"",address:"",courses:"",
   });
 
   const handleSubmit = async (e) => {
@@ -33,26 +33,29 @@ function App() {
       <h4 className="text-center display-4">Register Here</h4>
      <form action="/register" onSubmit={handleSubmit}>
       <div>
-        <input className="form-control py-2" type="text" onChange={handleChange} value={registration.name} name="name" placeholder="Enter Your Name" />
+        <input className="form-control py-2" required type="text" onChange={handleChange} value={registration.name} name="name" placeholder="Enter Your Name" />
       </div>
       <div>
-        <input className="form-control py-2" type="date" onChange={handleChange} value={registration.date} name="date" placeholder="Enter Your DOB" />
+        <input className="form-control py-2" required type="email" onChange={handleChange} value={registration.email} name="email" placeholder="Enter Your Email" />
       </div>
       <div>
-        <input className="form-control py-2" type="string" onChange={handleChange} value={registration.age} name="age" placeholder="Enter Your Age" />
+        <input className="form-control py-2" required type="date" onChange={handleChange} value={registration.date} name="date" placeholder="Enter Your DOB" />
       </div>
       <div>
-        <select className="form-control py-2" onChange={handleChange} name="gender" id="">
+        <input className="form-control py-2" required type="string" onChange={handleChange} value={registration.age} name="age" placeholder="Enter Your Age" />
+      </div>
+      <div>
+        <select className="form-control py-2" required onChange={handleChange} name="gender" id="">
           <option value="">Select Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
       </div>
       <div>
-       <input className="form-control py-2" type="text" name="address"  onChange={handleChange} value={registration.address} placeholder="Enter Your Address" />
+       <input className="form-control py-2" required type="text" name="address"  onChange={handleChange} value={registration.address} placeholder="Enter Your Address" />
       </div>
       <div>
-      <select className="form-control py-2" onChange={handleChange} name="courses" id="">
+      <select className="form-control py-2" required onChange={handleChange} name="courses" id="">
           <option value="">Select courses</option>
           <option value="C">C</option>
           <option value="C++">C++</option>
