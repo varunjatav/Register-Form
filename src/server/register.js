@@ -67,7 +67,7 @@ var transporter = nodemailer.createTransport({
   });
   
   var mailOptions = {
-    from: 'mohit.mohit979@gmail.com',
+    from: data.email,
     to: 'mohit.mohit979@gmail.com , paramcomputers.jhs@gmail.com',
     subject: 'Mail Regards Admission of Students',
     text: "A new Student with name : "+ data.name + " , Date of Birth : " + data.date + " , Age : " + data.age + " , Gender : " + data.gender + " , Address : " + data.address + " , Course : " + data.courses + " , Email : " + data.email,
